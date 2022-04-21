@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mabinogi_Packer", "Mabinogi_Packer\Mabinogi_Packer.csproj", "{D4DE2B2C-A56F-48B7-B3D4-41FEFEDD0635}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4DE2B2C-A56F-48B7-B3D4-41FEFEDD0635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DE2B2C-A56F-48B7-B3D4-41FEFEDD0635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DE2B2C-A56F-48B7-B3D4-41FEFEDD0635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DE2B2C-A56F-48B7-B3D4-41FEFEDD0635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DE2B2C-A56F-48B7-B3D4-41FEFEDD0635}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal
