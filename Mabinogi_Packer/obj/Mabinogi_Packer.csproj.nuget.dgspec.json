@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zxc30\\RiderProjects\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj": {}
+    "C:\\Users\\zxc30\\Documents\\GitHub\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zxc30\\RiderProjects\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj": {
+    "C:\\Users\\zxc30\\Documents\\GitHub\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zxc30\\RiderProjects\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj",
+        "projectUniqueName": "C:\\Users\\zxc30\\Documents\\GitHub\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj",
         "projectName": "Mabinogi_Packer",
-        "projectPath": "C:\\Users\\zxc30\\RiderProjects\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj",
+        "projectPath": "C:\\Users\\zxc30\\Documents\\GitHub\\Mabinogi_Packer\\Mabinogi_Packer\\Mabinogi_Packer.csproj",
         "packagesPath": "C:\\Users\\zxc30\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zxc30\\RiderProjects\\Mabinogi_Packer\\Mabinogi_Packer\\obj\\",
+        "outputPath": "C:\\Users\\zxc30\\Documents\\GitHub\\Mabinogi_Packer\\Mabinogi_Packer\\obj\\",
         "projectStyle": "PackageReference",
+        "crossTargeting": true,
         "configFilePaths": [
           "C:\\Users\\zxc30\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net6.0",
+          "net6.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -27,6 +29,10 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
+            "projectReferences": {}
+          },
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
             "projectReferences": {}
           }
         },
@@ -60,7 +66,32 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        },
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

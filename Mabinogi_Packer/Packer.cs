@@ -70,55 +70,6 @@ internal class Packer
         return RunCmd(command);
     }
 
-    public Task<(bool scueeces, string result)> FindAllPackageFirst(string gamePath, string findFile)
-    {
-
-        var files = new DirectoryInfo(gamePath).GetFiles("*.it");
-
-        List<Task<string>> tasksArr = new();
-
-
-        var index = -1;
-        var result = string.Empty;
-        while (index < files.Length)
-        {
-            for (var i = 0; i < 5; i++)
-            {
-                index++;
-                if (index >= files.Length - 1)
-                {
-                    break;
-                }
-
-                var index1 = index;
-                var task = Task<string>.Factory.StartNew(() =>
-                {
-                    var fileInfo = files[index1];
-                    var split = List(fileInfo.FullName).Result.Item2.Split('\n');
-
-                    return split.Any(item => item.ToLowerInvariant().Contains(findFile.ToLowerInvariant())) ? fileInfo.Name : string.Empty;
-
-                });
-                tasksArr.Add(task);
-
-            }
-
-            Task.WaitAll(tasksArr.ToArray());
-
-            var firstOrDefault = tasksArr.FirstOrDefault(x => !string.IsNullOrEmpty(x.Result));
-            result = firstOrDefault?.Result;
-            if (firstOrDefault != null)
-            {
-                break;
-            }
-
-            tasksArr.Clear();
-        }
-
-        return Task.FromResult((!string.IsNullOrEmpty(result), result ?? ""));
-
-    }
-
     public Task<(bool success, (string findedFile, string itFileName)[] result)> FindAll(string needFindFilePath)
     {
 
@@ -131,38 +82,66 @@ internal class Packer
         var result = new List<(string findedFile, string findFileName)>();
         while (index < files.Length)
         {
-            for (var i = 0; i < 5; i++)
-            {
-                index++;
-                if (index >= files.Length - 1)
-                {
-                    break;
-                }
-
-                var index1 = index;
-                Task<(string findedFile, string itFileName)> task = Task<(string, string)>.Factory.StartNew(() =>
-                {
-                    var fileInfo = files[index1];
-                    var split = List(fileInfo.FullName).Result.findFileReuslt.Split('\n');
-
-                    var filePath = split.FirstOrDefault(item => item.ToLowerInvariant().Contains(needFindFilePath.ToLowerInvariant())) ?? string.Empty;
-                    var itFileName = !string.IsNullOrEmpty(filePath) ? fileInfo.Name : string.Empty;
-                    return (filePath, itFileName);
-
-                });
-                tasksArr.Add(task);
-
-            }
-
+            index = FindItFile(needFindFilePath, index, files, tasksArr);
             Task.WaitAll(tasksArr.ToArray());
-
             var enumerable = tasksArr.Where(x => !string.IsNullOrEmpty(x.Result.findedFile)).Select(x => x.Result);
             result.AddRange(enumerable);
-
             tasksArr.Clear();
         }
 
         return Task.FromResult((result.Count != 0, result.ToArray()));
 
+    }
+
+    public Task<(bool, (string findedFile, string findFileName))> FindAllPackageFirst(string needFindFilePath)
+    {
+        var files = new DirectoryInfo(_root).GetFiles("*.it");
+        List<Task<(string findedFile, string itFileName)>> tasksArr = new();
+
+        var index = -1;
+        (string findedFile, string findFileName) result = default;
+        while (index < files.Length)
+        {
+            index = FindItFile(needFindFilePath, index, files, tasksArr);
+
+            Task.WaitAll(tasksArr.ToArray());
+
+            result = tasksArr.FirstOrDefault(x => !string.IsNullOrEmpty(x.Result.findedFile))!.Result;
+
+            tasksArr.Clear();
+        }
+
+        return Task.FromResult((result != default, result));
+
+
+    }
+
+    private int FindItFile(string needFindFilePath, int index, FileInfo[] files, List<Task<(string findedFile, string itFileName)>> tasksArr)
+    {
+
+        for (var i = 0; i < 5; i++)
+        {
+            index++;
+            if (index >= files.Length - 1)
+            {
+                break;
+            }
+
+            var index1 = index;
+            Task<(string findedFile, string itFileName)> task = Task<(string, string)>.Factory.StartNew(() =>
+            {
+                var fileInfo = files[index1];
+                var split = List(fileInfo.FullName).Result.findFileReuslt.Split('\n');
+
+                var filePath = split.FirstOrDefault(item => item.ToLowerInvariant().Contains(needFindFilePath.ToLowerInvariant())) ?? string.Empty;
+                var itFileName = !string.IsNullOrEmpty(filePath) ? fileInfo.Name : string.Empty;
+                return (filePath, itFileName);
+
+            });
+            tasksArr.Add(task);
+
+        }
+
+        return index;
     }
 }
